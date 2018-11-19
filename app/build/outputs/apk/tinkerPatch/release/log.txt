@@ -1,0 +1,50 @@
+-----------------------Tinker patch begin-----------------------
+configuration: 
+oldApk:/Users/wangkaixuan/wkx/TestBugly/app/build/bakApk/app-1119-15-09-15/app-release.apk
+newApk:/Users/wangkaixuan/wkx/TestBugly/app/build/outputs/apk/release/app-release.apk
+outputFolder:/Users/wangkaixuan/wkx/TestBugly/app/build/outputs/apk/tinkerPatch/release
+isIgnoreWarning:false
+isProtectedApp:false
+7-ZipPath:/Users/wangkaixuan/.gradle/caches/modules-2/files-2.1/com.tencent.mm/SevenZip/1.1.10/cc390e6c704b74496d9ba0e9b46d2cf8a2a96b84/SevenZip-1.1.10-osx-x86_64.exe
+useSignAPk:true
+package meta fields: 
+dex configs: 
+dexMode: jar
+dexPattern:classes.*\.dex
+dexPattern:assets/secondary-dex-.\.jar
+dex loader:com.tencent.tinker.loader.*
+dex loader:com.tencent.bugly.beta.tinker.TinkerPatchReflectApplication
+lib configs: 
+libPattern:lib/.*/.*\.so
+resource configs: 
+resPattern:assets/.*
+resPattern:r/.*
+resPattern:AndroidManifest\.xml
+resPattern:res/.*
+resPattern:resources\.arsc
+resIgnore change:assets/.*_meta\.txt
+largeModSize:100kb
+useApplyResource:true
+
+Analyze old and new apk files:
+old apk: app-release.apk, size=2889569, md5=158a576bdcadde318d80e4bb09fdf5c9
+new apk: app-release.apk, size=2889569, md5=2fe0b13bd9cec1d50a36e573df374956
+
+Manifest was changed, while there's no any new components added. Make sure if such changes were all you expected.
+
+UnZipping apk to /Users/wangkaixuan/wkx/TestBugly/app/build/outputs/apk/tinkerPatch/release/app-release-old
+UnZipping apk to /Users/wangkaixuan/wkx/TestBugly/app/build/outputs/apk/tinkerPatch/release/app-release-new
+found modify resource: AndroidManifest.xml, but it is AndroidManifest.xml, just ignore!
+Check for loader classes in dex: classes.dex
+No dexes were changed, nothing needs to be done next.
+Generate unsigned apk: patch_unsigned.apk
+Signing apk: patch_signed.apk
+Signing key algorithm is SHA1withRSA
+Try use 7za to compress the patch file: patch_signed_7zip.apk, will cost much more time
+Current 7za path:/Users/wangkaixuan/.gradle/caches/modules-2/files-2.1/com.tencent.mm/SevenZip/1.1.10/cc390e6c704b74496d9ba0e9b46d2cf8a2a96b84/SevenZip-1.1.10-osx-x86_64.exe
+Result: final signed patch result: /Users/wangkaixuan/wkx/TestBugly/app/build/outputs/apk/tinkerPatch/release/patch_signed.apk, size=2045
+Result: final signed with 7zip patch result: /Users/wangkaixuan/wkx/TestBugly/app/build/outputs/apk/tinkerPatch/release/patch_signed_7zip.apk, size=2363
+Warning: patch_signed_7zip.apk is bigger than patch_signed.apk 318 byte, you should choose patch_signed.apk at these time!
+Tinker patch done, total time cost: 1.283000s
+Tinker patch done, you can go to file to find the output /Users/wangkaixuan/wkx/TestBugly/app/build/outputs/apk/tinkerPatch/release
+-----------------------Tinker patch end-------------------------

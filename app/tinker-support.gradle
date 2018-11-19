@@ -1,0 +1,54 @@
+apply plugin: 'com.tencent.bugly.tinker-support'
+
+def bakPath = file("${buildDir}/bakApk/")
+
+/**
+ * 此处填写每次构建生成的基准包目录
+ */
+def baseApkDir = "app-1119-15-09-15"
+
+tinkerSupport {
+    /**构建基准包和补丁包都要指定不同的tinkerId，并且必须保证唯一性 base/patch*/
+    tinkerId = "patch-1.0.1"
+    enable = true
+    autoBackupApkDir = "${bakPath}"
+    overrideTinkerPatchConfiguration = true
+    baseApk = "${bakPath}/${baseApkDir}/app-release.apk"
+    baseApkProguardMapping = "${bakPath}/${baseApkDir}/app-release-mapping.txt"
+    baseApkResourceMapping = "${bakPath}/${baseApkDir}/app-release-R.txt"
+    enableProxyApplication = true
+    supportHotplugComponent = true
+}
+
+/**
+ * 一般来说,我们无需对下面的参数做任何的修改
+ * 对于各参数的详细介绍请参考:
+ * https://github.com/Tencent/tinker/wiki/Tinker-%E6%8E%A5%E5%85%A5%E6%8C%87%E5%8D%97
+ */
+tinkerPatch {
+    ignoreWarning = false
+    useSign = true
+    dex {
+        dexMode = "jar"
+        pattern = ["classes*.dex"]
+        loader = []
+    }
+    lib {
+        pattern = ["lib/*/*.so"]
+    }
+
+    res {
+        pattern = ["res/*", "r/*", "assets/*", "resources.arsc", "AndroidManifest.xml"]
+        ignoreChange = []
+        largeModSize = 100
+    }
+
+    packageConfig {
+    }
+    sevenZip {
+        zipArtifact = "com.tencent.mm:SevenZip:1.1.10"
+    }
+    buildConfig {
+        keepDexApply = false
+    }
+}

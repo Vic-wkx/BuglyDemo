@@ -1,0 +1,4 @@
+#base package config field
+#Mon Nov 19 15:11:08 CST 2018
+NEW_TINKER_ID=patch-1.0.1
+TINKER_ID=patch-1.0.0
